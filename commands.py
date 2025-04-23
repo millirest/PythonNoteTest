@@ -65,6 +65,32 @@ def Edit_Note(id):
                 print(f"Вывожу данные из заметки №{data[0]}: \n")
                 print(f"id:{data[0]}: {data[1]}\n{data[2]}\nДата: {data[3]}\n")
 
+
+def update_note():
+    with open('Note.csv', 'r', encoding='utf-8') as f:
+        data_first = f.readlines()
+        participants = {}
+        print(data_first)
+        for line in data_first:
+            data = line.strip().split(sep=";")
+            id = data[0]
+            text = data[1:]
+            participants[id] = text
+        print(participants)
+        sorted_data = dict(sorted(participants.items(), key=lambda x: x[0], reverse=False))
+        print(sorted_data)
+    with open('Note.csv', 'w', encoding='utf-8') as f:
+        f.write(sorted_data)
+
+        # for player , score in participants.items():
+        #     if score > K:
+        #     filter_player[player] = score
+
+
+# Сортируем участников по убыванию баллов
+        # sorted_data = dict(sorted(filter_player.items(), key=lambda x: x[1], reverse=True))
+    
+
 def Tittle_Note():
     tittle_Note = input('Введите заголовок: \n ')
     return tittle_Note
