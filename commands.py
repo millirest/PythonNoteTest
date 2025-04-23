@@ -11,7 +11,8 @@ def input_Note():
     body_Note = Body_Note()
     time_Note = datetime.now()
     with open('Note.csv', 'a', encoding='utf-8') as f:
-            f.write(f"{id_Note};{tittle_Note};{body_Note};{time_Note}") 
+            print(id_Note)
+            f.write(f"{id_Note};{tittle_Note};{body_Note};{time_Note}\n") 
 
 
 def print_data(id):
