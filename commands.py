@@ -5,6 +5,30 @@ from NoteClass import Note
 cur_path = os.path.dirname(__file__)
 print(cur_path)
 
+def show(txt):
+    array_notes = read_file()
+
+    if array_notes:
+        if txt == "all":
+            print("ЖУРНАЛ ЗАМЕТОК:")
+            for i in array_notes:
+                print(Note.Note.map_note(i))
+
+        elif txt == "ID":
+            for i in array_notes:
+                print("ID: ", Note.Note.get_id(i))
+            id = input("\nВведите id заметки: ")
+            flag = True
+            for i in array_notes:
+                if id == Note.Note.get_id(i):
+                    print(Note.Note.map_note(i))
+                    flag = False
+            if flag:
+                print("Нет такого id")
+
+
+
+
 def read_file():
     try:
         array = []
@@ -31,20 +55,33 @@ def write_file(array, mode):
     file.close
 
 
+def add_note():
+    title = input("Введите заголовок заметки:\n")
+    body = input("Введите описание заметки:\n")
+    note = Note.Note(title=title, body=body)
+    array_notes = read_file()
+    for i in array_notes:
+        if Note.Note.get_id(note) == Note.Note.get_id(i):
+            Note.Note.set_id(note)
+    array_notes.append(note)
+    write_file(array_notes, 'a')
+    print("Заметка добавлена в журнал!")
 
+def del_notes():
+    id = input("Введите ID удаляемой заметки: ")
+    array_notes = read_file()
+    flag = False
 
+    for i in array_notes:
+        if id == Note.Note.get_id(i):
+            array_notes.remove(i)
+            flag = True
 
-# def add_note():
-#     title = input("Введите заголовок заметки:\n")
-#     body = input("Введите описание заметки:\n")
-#     note = Note.Note(title=title, body=body)
-#     array_notes = read_file()
-#     for i in array_notes:
-#         if Note.Note.get_id(note) == Note.Note.get_id(i):
-#             Note.Note.set_id(note)
-#     array_notes.append(note)
-#     wF.write_file(array_notes, 'a')
-#     print("Заметка добавлена в журнал!")
+    if flag:
+        write_file(array_notes, 'a')
+        print("Заметка с id: ", id, " успешно удалена!")
+    else:
+        print("нет такого id")
 
 
 
