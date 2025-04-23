@@ -104,6 +104,3 @@ def New_Id():
             data_first = f.readlines()
             new_Id = len(data_first)+1
     return new_Id
-
-
-

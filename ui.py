@@ -1,40 +1,39 @@
-from commands import print_AllNote, input_Note, Select_Note
+import commands as com
+#from commands import print_AllNote, input_Note, Select_Note
+#from commands import printNenuTitle
 
 def interface():
-    print("Что вы хотите сделать?\n" \
-    "1 - Показать все заметки\n" \
-    "2 - Добавить заметку\n" \
-    "3 - Выбрать заметку\n")
-    command = int(input('Введите число:\n'))
+    while True:
+        menu_console()
+        user_input = input()
+        if user_input == '1':
+            com.show("all")
+        elif user_input == '2':
+            com.show("ID")
+        elif user_input == '3':
+            com.show("date")
+        elif user_input == '4':
+            com.show("all")
+            com.change_note()
+        elif user_input == '5':
+            com.add_note()
+        elif user_input == '6':
+            com.show("all")
+            com.del_notes()
+        else:
+            print("Программа Журнал заметок завершена")
+            break
 
-    while command !=1 and command !=2 and command !=3:
-        print("Неправильный ввод")
-        command = int(input('Введите число:\n'))
+def menu_console():
+        print("           Главное меню\n" \
+        "           ЖУРНАЛ ЗАМЕТОК")
+        print("1 - вывод журнала \n" \
+        "2 - вывод заметки по id \n" \
+        "3 - выбор заметки по дате\n" \
+        "4 - редактирование заметки\n"\
+        "5 - добавление заметки\n" \
+        "6 - удаление заметки\n" \
+        "7 - выход")
 
-    if command == 1:
-        print_AllNote()
-        interface()
-    elif command == 2:
-        input_Note()
-        interface()
-    elif command == 3:
-        Select_Note()
-        interface()
-        
+        print("\n введите пункт из меню ")
 
-def interfaceEdit():
-    print("Что с ней сделать?"\
-                "1 - Редактировать\n" \
-                "2 - Удалить\n" \
-                "3 - Выход\n")
-    editCommand = int(input('Введите число:\n'))
-    while editCommand !=1 and editCommand !=2 and editCommand!=3:
-        print("Неправильный ввод")
-        editCommand = int(input('Введите число:\n'))
-        
-    if editCommand == 1:
-        pass
-    elif editCommand == 2:
-        pass
-    elif editCommand == 3:
-        pass
