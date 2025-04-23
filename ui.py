@@ -1,10 +1,11 @@
+from commands import print_Note, print_AllNote, input_Note
 
 def interface():
     print("Добрый день, это спецаилный бот для заметок \n" \
     "Что вы хотите сделать?\n" \
     "1 - Показать все заметки\n" \
-    "2 - Редактировать заметки" \
-    "3 - Запись даных\n")
+    "2 - Добавить заметку" \
+    "3 - Редактировать заметку\n")
     command = int(input('Введите число:\n'))
 
     while command !=1 and command !=2 :
@@ -14,6 +15,9 @@ def interface():
    
 
     if command == 1:
-        input_data()
+        print_AllNote()
     elif command == 2:
-        print_data() 
+        input_Note()
+    elif command == 3:
+        
+

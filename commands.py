@@ -11,11 +11,12 @@ def input_Note():
     body_Note = Body_Note()
     time_Note = datetime.now()
     with open('Note.csv', 'a', encoding='utf-8') as f:
-            print(id_Note)
             f.write(f"{id_Note};{tittle_Note};{body_Note};{time_Note}\n") 
+            print("Замтка добавлена!")
 
 
-def print_data(id):
+def print_Note(id):
+    Body_Note = input('Введите номер заметки: \n ')
     print(f"Вывожу данные из заметки №{id}: \n")
     with open('Note.csv', 'r', encoding='utf-8') as f:
         data_first = f.readlines()
@@ -27,17 +28,13 @@ def print_data(id):
                 j = i
         print(''.join(data_first_list))
 
-def print_AllData():
-    print("Вывожу список заметок: \n")
+def print_AllNote():
+    print("\nВывожу список заметок:\n")
     with open('Note.csv', 'r', encoding='utf-8') as f:
         data_first = f.readlines()
-        data_first_list = []
-        j = 0
-        for i in range(len(data_first)):
-            if data_first[i] == '\n' or  i == len(data_first)-1:
-                data_first_list.append(''.join(data_first[j:i+1]))
-                j = i
-        print(''.join(data_first_list))
+        for line in data_first:
+            data = line.strip().split(sep=';')
+            print(f"id:{data[0]}: {data[1]}\n{data[2]}\nДата: {data[3]}\n")
 
 
 def Tittle_Note():

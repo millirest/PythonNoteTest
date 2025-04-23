@@ -1,5 +1,5 @@
 import os
-from commands import New_Id, input_Note
+from commands import New_Id, input_Note, print_AllNote
 
 cur_path = os.path.dirname(__file__)
 os.chdir(cur_path)
@@ -8,7 +8,4 @@ os.chdir(cur_path)
 #     interface()
 
 
-ID = New_Id()
-print(ID)
-
-input_Note()
+print_AllNote()
