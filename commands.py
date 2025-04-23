@@ -1,22 +1,50 @@
 from datetime import datetime
 import os
+from NoteClass import Note
 
 cur_path = os.path.dirname(__file__)
 print(cur_path)
 
+def read_file():
+    try:
+        array = []
+        file = open("notes.csv", "r", encoding='utf-8')
+        notes = file.read().strip().split("\n")
+        for n in notes:
+            split_n = n.split(';')
+            note = Note.Note(
+                id = split_n[0], title = split_n[1], body = split_n[2], date = split_n[3])
+            array.append(note)
+    except Exception:
+        print('журнал заметок пустой')
+    finally:
+        return array
+    
+def write_file(array, mode):
+    file = open("notes.csv", mode='w', encoding='utf-8')
+    file.seek(0)
+    file.close()
+    file = open("notes.csv", mode=mode, encoding='utf-8')
+    for notes in array:
+        file.write(Note.Note.to_string(notes))
+        file.write('\n')
+    file.close
 
 
-def add_note():
-    title = input("Введите заголовок заметки:\n")
-    body = input("Введите описание заметки:\n")
-    note = Models.Note.Note(title=title, body=body)
-    array_notes = lF.read_file()
-    for i in array_notes:
-        if Models.Note.Note.get_id(note) == Models.Note.Note.get_id(i):
-            Models.Note.Note.set_id(note)
-    array_notes.append(note)
-    wF.write_file(array_notes, 'a')
-    print("Заметка добавлена в журнал!")
+
+
+
+# def add_note():
+#     title = input("Введите заголовок заметки:\n")
+#     body = input("Введите описание заметки:\n")
+#     note = Note.Note(title=title, body=body)
+#     array_notes = read_file()
+#     for i in array_notes:
+#         if Note.Note.get_id(note) == Note.Note.get_id(i):
+#             Note.Note.set_id(note)
+#     array_notes.append(note)
+#     wF.write_file(array_notes, 'a')
+#     print("Заметка добавлена в журнал!")
 
 
 

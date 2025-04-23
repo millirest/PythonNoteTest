@@ -1,6 +1,12 @@
 from datetime import datetime
 
 
+count = 0
+def counter():
+    global count
+    count += 1
+    return count
+
 
 class Note:
     def __init__(self, id=str(counter.counter()), title="текст", body="текст",
@@ -22,6 +28,9 @@ class Note:
     def get_date(note):
         return note.date
 
+    def set_id(note):
+        note.id = str(counter.counter())
+
     def set_title(note):
         note.title = note
 
@@ -30,3 +39,9 @@ class Note:
 
     def set_date(note):
         note.date = str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))
+
+    def to_string(note):
+        return note.id + ';' + note.title + ';' + note.body + ';' + note.date
+
+    def map_note(note):
+        return '\nID: ' + note.id + '\n' + 'Название: ' + note.title + '\n' + 'Описание: ' + note.body + '\n' + 'Дата публикации: ' + note.date
