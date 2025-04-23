@@ -26,7 +26,18 @@ def show(txt):
             if flag:
                 print("Нет такого id")
 
-
+        elif txt == "date":
+            date = input("Введите дату (формат: dd.mm.yyyy: ")
+            flag = True
+            for i in array_notes:
+                date_note = str(Note.Note.get_date(i))
+                if date == date_note[:10]:
+                    print(Note.Note.map_note(i))
+                    flag = False
+            if flag:
+                print("Нет такой даты")
+        else:
+            print("Журнал заметок пустой!")
 
 
 def read_file():
