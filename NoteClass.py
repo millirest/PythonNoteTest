@@ -1,6 +1,12 @@
 from datetime import datetime
-from Count import counter
 
+
+count = 0
+
+def counter():
+    global count
+    count += 1
+    return count
 
 
 class Note:

@@ -16,7 +16,7 @@ def show(txt):
 
         elif txt == "ID":
             for i in array_notes:
-                print("ID: ", Note.get_id(i))
+                print("ID: ", Note.get_id(i), Note.get_title(i), Note.get_body(i))
             id = input("\nВведите id заметки: ")
             flag = True
             for i in array_notes:
