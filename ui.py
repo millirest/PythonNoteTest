@@ -1,3 +1,5 @@
+from commands import input_data, print_data
+
 def interface():
     print("Добрый день, это спецаилный бот для заметок \n" \
     "Что вы хотите сделать?\n" \
