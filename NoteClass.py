@@ -1,15 +1,10 @@
 from datetime import datetime
+from Count import counter
 
-
-count = 0
-def counter():
-    global count
-    count += 1
-    return count
 
 
 class Note:
-    def __init__(self, id=str(counter.counter()), title="текст", body="текст",
+    def __init__(self, id=str(counter()), title="текст", body="текст",
                  date=str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))):
         self.id = id
         self.title = title
@@ -29,7 +24,7 @@ class Note:
         return note.date
 
     def set_id(note):
-        note.id = str(counter.counter())
+        note.id = str(counter())
 
     def set_title(note):
         note.title = note

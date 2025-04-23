@@ -12,16 +12,16 @@ def show(txt):
         if txt == "all":
             print("ЖУРНАЛ ЗАМЕТОК:")
             for i in array_notes:
-                print(Note.Note.map_note(i))
+                print(Note.map_note(i))
 
         elif txt == "ID":
             for i in array_notes:
-                print("ID: ", Note.Note.get_id(i))
+                print("ID: ", Note.get_id(i))
             id = input("\nВведите id заметки: ")
             flag = True
             for i in array_notes:
-                if id == Note.Note.get_id(i):
-                    print(Note.Note.map_note(i))
+                if id == Note.get_id(i):
+                    print(Note.map_note(i))
                     flag = False
             if flag:
                 print("Нет такого id")
@@ -30,9 +30,9 @@ def show(txt):
             date = input("Введите дату (формат: dd.mm.yyyy: ")
             flag = True
             for i in array_notes:
-                date_note = str(Note.Note.get_date(i))
+                date_note = str(Note.get_date(i))
                 if date == date_note[:10]:
-                    print(Note.Note.map_note(i))
+                    print(Note.map_note(i))
                     flag = False
             if flag:
                 print("Нет такой даты")
@@ -47,7 +47,7 @@ def read_file():
         notes = file.read().strip().split("\n")
         for n in notes:
             split_n = n.split(';')
-            note = Note.Note(
+            note = Note(
                 id = split_n[0], title = split_n[1], body = split_n[2], date = split_n[3])
             array.append(note)
     except Exception:
@@ -61,19 +61,19 @@ def write_file(array, mode):
     file.close()
     file = open("notes.csv", mode=mode, encoding='utf-8')
     for notes in array:
-        file.write(Note.Note.to_string(notes))
+        file.write(Note.to_string(notes))
         file.write('\n')
     file.close
 
 
 def add_note():
-    title = input("Введите заголовок заметки:\n")
-    body = input("Введите описание заметки:\n")
-    note = Note.Note(title=title, body=body)
+    inputtitle = input("Введите заголовок заметки:\n")
+    inputbody = input("Введите описание заметки:\n")
+    note = Note(inputtitle, inputbody)
     array_notes = read_file()
     for i in array_notes:
-        if Note.Note.get_id(note) == Note.Note.get_id(i):
-            Note.Note.set_id(note)
+        if Note.get_id(note) == Note.get_id(i):
+            Note.set_id(note)
     array_notes.append(note)
     write_file(array_notes, 'a')
     print("Заметка добавлена в журнал!")
@@ -84,7 +84,7 @@ def del_notes():
     flag = False
 
     for i in array_notes:
-        if id == Note.Note.get_id(i):
+        if id == Note.get_id(i):
             array_notes.remove(i)
             flag = True
 
@@ -93,6 +93,26 @@ def del_notes():
         print("Заметка с id: ", id, " успешно удалена!")
     else:
         print("нет такого id")
+
+def change_note():
+    id = input("Введите ID изменяемой заметки: ")
+    array_notes = read_file()
+    flag = True
+    array_notes_new = []
+    for i in array_notes:
+        if id == Note.get_id(i):
+            i.title = input("измените  заголовок:\n")
+            i.body = input("измените  описание:\n")
+            Note.set_date(i)
+            logic = False
+        array_notes_new.append(i)
+
+    if flag:
+        write_file(array_notes_new, 'a')
+        print("Заметка с id: ", id, " успешно изменена!")
+    else:
+        print("нет такого id")
+
 
 
 
