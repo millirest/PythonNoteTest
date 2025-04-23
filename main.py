@@ -6,3 +6,4 @@ os.chdir(cur_path)
 
 if __name__ == '__main__':
     interface()
+

@@ -69,7 +69,7 @@ def write_file(array, mode):
 def add_note():
     inputtitle = input("Введите заголовок заметки:\n")
     inputbody = input("Введите описание заметки:\n")
-    note = Note(inputtitle, inputbody)
+    note = Note(title=inputtitle, body=inputbody)
     array_notes = read_file()
     for i in array_notes:
         if Note.get_id(note) == Note.get_id(i):
@@ -104,7 +104,6 @@ def change_note():
             i.title = input("измените  заголовок:\n")
             i.body = input("измените  описание:\n")
             Note.set_date(i)
-            logic = False
         array_notes_new.append(i)
 
     if flag:
@@ -113,7 +112,21 @@ def change_note():
     else:
         print("нет такого id")
 
+def del_notes():
+    id = input("Введите ID удаляемой заметки: ")
+    array_notes = read_file()
+    flag = False
 
+    for i in array_notes:
+        if id == Note.get_id(i):
+            array_notes.remove(i)
+            flag = True
+
+    if flag:
+        write_file(array_notes, 'a')
+        print("Заметка с id: ", id, " успешно удалена!")
+    else:
+        print("нет такого id")
 
 
 
